@@ -10,5 +10,8 @@ import scrapy
 
 class MeituanHotelItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    id = scrapy.Field()
+    name = scrapy.Field()
+    address = scrapy.Field()
+    latlng = scrapy.Field()
+    tel = scrapy.Field()
