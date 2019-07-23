@@ -14,6 +14,7 @@ BOT_NAME = 'meituan_hotel'
 SPIDER_MODULES = ['meituan_hotel.spiders']
 NEWSPIDER_MODULE = 'meituan_hotel.spiders'
 
+LOG_LEVEL = "INFO"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'meituan_hotel (+http://www.yourdomain.com)'
@@ -22,12 +23,13 @@ NEWSPIDER_MODULE = 'meituan_hotel.spiders'
 ROBOTSTXT_OBEY = True
 
 DOWNLOADER_MIDDLEWARES = {
+    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': None,
     'meituan_hotel.middlewares.MeituanHotelDownloaderMiddleware': 543,
+    'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware': None
 }
 ITEM_PIPELINES = {
     'meituan_hotel.pipelines.CsvWriterPipeline': 544,
 }
-
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 

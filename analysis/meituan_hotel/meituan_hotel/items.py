@@ -9,9 +9,15 @@ import scrapy
 
 
 class MeituanHotelItem(scrapy.Item):
-    # define the fields for your item here like:
-    id = scrapy.Field()
-    name = scrapy.Field()
-    address = scrapy.Field()
-    latlng = scrapy.Field()
-    tel = scrapy.Field()
+  id = scrapy.Field()
+  name = scrapy.Field()
+  address = scrapy.Field()
+  latlng = scrapy.Field()
+  type = scrapy.Field()
+  score = scrapy.Field()
+  tel = scrapy.Field()
+  info = scrapy.Field()
+
+
+class MeituanHotelUrlItem(scrapy.Item):
+  url = scrapy.Field()
