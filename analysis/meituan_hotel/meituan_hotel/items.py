@@ -9,15 +9,15 @@ import scrapy
 
 
 class MeituanHotelItem(scrapy.Item):
-  id = scrapy.Field()
-  name = scrapy.Field()
-  address = scrapy.Field()
-  latlng = scrapy.Field()
-  type = scrapy.Field()
-  score = scrapy.Field()
-  tel = scrapy.Field()
-  info = scrapy.Field()
+    id = scrapy.Field()
+    name = scrapy.Field()
+    address = scrapy.Field()
+    latlng = scrapy.Field()
+    type = scrapy.Field()
+    score = scrapy.Field()
+    tel = scrapy.Field()
+    info = scrapy.Field()
 
 
 class MeituanHotelUrlItem(scrapy.Item):
-  url = scrapy.Field()
+    url = scrapy.Field()
