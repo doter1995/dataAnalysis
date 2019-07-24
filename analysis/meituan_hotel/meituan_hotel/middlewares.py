@@ -41,7 +41,7 @@ class MeituanHotelDownloaderMiddleware(object):
       logging.warning("request url:"+request.url)
       logging.warning("time out:===============")
       spider.browser.execute_script('window.stop()')
-    time.sleep(3)
+    time.sleep(2)
     return HtmlResponse(url=spider.browser.current_url,
                         body=spider.browser.page_source,
                         encoding="utf-8", request=request)
