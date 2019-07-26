@@ -18,7 +18,7 @@ class CsvWriterPipeline(object):
         base_path = os.path.abspath("../../dataSet/{date}/".format(
             date=datetime.now().strftime('%Y-%m-%d')))
         init_path(base_path)
-        if spider.name == 'meituan_url_item':
+        if spider.name in ['meituan_url_item','meituan_urls_item']:
             self.file = open(base_path + '/data_url.csv', 'w', encoding='utf-8',
                              newline='')
             self.writer = csv.DictWriter(self.file, ['url'])
