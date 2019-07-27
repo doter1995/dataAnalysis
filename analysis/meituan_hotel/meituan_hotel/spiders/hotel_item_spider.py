@@ -40,8 +40,12 @@ class hotal(Spider):
             "//div[@class='poi-header']/div/div/span/text()")[1].extract()
         item["latlng"] = self.fromartLatlng(response.xpath(
             "//div[@class='map-display']/img/@src")[0].extract())
-        item["type"] = response.xpath(
-            "//div[@class='poi-header']/div/div/div/span/text()")[0].extract()
+        try:
+            item["type"] = response.xpath(
+                "//div[@class='poi-header']/div/div/div/span/text()")[
+                0].extract()
+        except:
+            item["type"] = ""
         item['score'] = response.xpath(
             "//div[@class='rate-header']//em[@class='score-color']/text()")[
             0].extract()

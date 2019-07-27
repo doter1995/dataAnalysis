@@ -33,3 +33,13 @@ def url_duplicates():
     logging.info("删除重复url，并且将其更新到dataSet_url中")
     get_need_url()
     logging.info("更新当前需要的抓取的Url")
+
+
+def merage_item_data():
+    dataSet_item_path = os.path.abspath("../../dataSet/{date}/dataSet_item.csv".format(
+        date=datetime.now().strftime('%Y-%m-%d')))
+    base_item_path = os.path.abspath("../../dataSet/dataSet_item.csv")
+    item_data = pd.read_csv(dataSet_item_path)
+    base_item_data = pd.read_csv(base_item_path)
+    base_item_data = pd.concat([base_item_data, item_data]).drop_duplicates("id")
+    base_item_data.to_csv(base_item_path, index=0)
