@@ -1,7 +1,7 @@
 import logging
 import os
 
-from drop_duplicates import url_duplicates
+from drop_duplicates import url_duplicates,merage_item_data
 
 os.system("scrapy crawl huanqiu_finance")
 
@@ -33,6 +33,8 @@ def crawl_hotel_meituan(city):
             print("merge data finish")
 
 
-# crawl_hotel_meituan("xian")
+crawl_hotel_meituan("xian")
 
 os.system("scrapy crawl meituan_hotel_item")
+
+merage_item_data()
