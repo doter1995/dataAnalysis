@@ -11,7 +11,8 @@ from meituan_hotel.items import MeituanHotelItem
 class hotal(Spider):
     name = "meituan_hotel_item"
 
-    def __init__(self):
+    def __init__(self, city=None, *args, **kwargs):
+        self.city = city
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
@@ -23,8 +24,7 @@ class hotal(Spider):
         logging.info("spider closed")
 
     def start_requests(self):
-        csv_data = pd.read_csv("../../dataSet/dataSet_url.csv".format(
-            date=datetime.now().strftime('%Y-%m-%d')))
+        csv_data = pd.read_csv("./../dataSet/dataSet_url_{city}.csv".format(self.city))
         i = 0
         while i < csv_data["url"].size:
             yield Request(str(csv_data["url"][i]), callback=self.parse)
@@ -46,9 +46,14 @@ class hotal(Spider):
                 0].extract()
         except:
             item["type"] = ""
-        item['score'] = response.xpath(
-            "//div[@class='rate-header']//em[@class='score-color']/text()")[
-            0].extract()
+
+        try:
+            item['score'] = response.xpath(
+                "//div[@class='rate-header']//em[@class='score-color']/text()")[
+                0].extract()
+        except:
+            item["score"] = ""
+
         item["tel"] = response.xpath(
             "//div[@class='poi-display']/ul/li[2]/div[2]/text()").extract()
         item["info"] = ",".join(response.xpath(

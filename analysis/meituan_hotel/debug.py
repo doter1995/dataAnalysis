@@ -3,14 +3,12 @@ import os
 
 from drop_duplicates import url_duplicates,merage_item_data
 
-os.system("scrapy crawl huanqiu_finance")
-
 # execute("scrapy crawl meituan_url_item".split())
 
 # url_duplicates()
 
-
-types = ["舒适/三星", "高档/四星", "豪华/五星"]
+city = "xian"
+types = ["经济型", "舒适/三星", "高档/四星", "豪华/五星"]
 prices = ["100以下", "100-200元", "200-300元", "300-400元", "500以上"]
 
 cmd_templete = "scrapy crawl meituan_urls_item -a stype={stype} -a sprices={sprices} -a city={city}"
@@ -29,12 +27,12 @@ def crawl_hotel_meituan(city):
             print("爬取完毕")
             print(log_templete.format(stype=stype, sprices=sprices,
                                             city=city))
-            url_duplicates()
+            url_duplicates(city)
             print("merge data finish")
 
-
-crawl_hotel_meituan("xian")
-
-os.system("scrapy crawl meituan_hotel_item")
-
-merage_item_data()
+# 爬取url
+crawl_hotel_meituan(city)
+# 爬取酒店信息
+os.system("scrapy crawl meituan_hotel_item  -a city={city}".format(city=city))
+# 合并信息
+merage_item_data(city)

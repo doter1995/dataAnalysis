@@ -15,15 +15,15 @@ class CsvWriterPipeline(object):
 
     def open_spider(self, spider):
 
-        base_path = os.path.abspath("../../dataSet/{date}/".format(
+        base_path = os.path.abspath("./../dataSet/{date}/".format(
             date=datetime.now().strftime('%Y-%m-%d')))
         init_path(base_path)
         if spider.name in ['meituan_url_item','meituan_urls_item']:
-            self.file = open(base_path + '/data_url.csv', 'w', encoding='utf-8',
+            self.file = open(base_path + '/data_url_{city}.csv'.format(city=spider.city), 'w', encoding='utf-8',
                              newline='')
             self.writer = csv.DictWriter(self.file, ['url'])
         else:
-            self.file = open(base_path + '/dataSet_item.csv', 'w',
+            self.file = open(base_path + '/dataSet_item_{city}.csv'.format(city=spider.city), 'w',
                              encoding='utf-8',
                              newline='')
             self.writer = csv.DictWriter(self.file, MeituanHotelItem.fields)
